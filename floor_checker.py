@@ -71,10 +71,10 @@ def price_checker():
 
 
 def email_sender():
-    gmailaddress = 'nftmailsender@gmail.com' #senders email login NOTE: Turn off all bullshit of gmail safety 
-    gmailpassword = 'NFTlietuva' #senders email password
+    gmailaddress = 'y@gmail.com' #senders email login NOTE: Turn off all bullshit of gmail safety 
+    gmailpassword = 'd' #senders email password
    
-    mailto = 'iggysservice@gmail.com' #write your email
+    mailto = 'xe@gmail.com' #write your email
     msg = 'Pasikeitimas eik checkink savo NFT'
     mailServer = smtplib.SMTP('smtp.gmail.com' , 587)
     mailServer.starttls()
