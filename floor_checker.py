@@ -44,7 +44,7 @@ while True:
         print(f"Sorry, that's not a number. You wrote: '{floor}'. What a double noob you are... Please try again.")
 
 
-driver = webdriver.Chrome(executable_path="C:\\Users\\r.c\\Downloads\\chromedriver_win32\\chromedriver.exe") #path to chromedriver.exe. Note that you need to use escape character \ for every - \
+driver = webdriver.Chrome(executable_path="/Users/Ignas 1/Downloads/chrome driver") #path to chromedriver.exe. Note that you need to use escape character \ for every - \
 
 driver.get("https://opensea.io/collection/billionaireclubnft") #project link
 
@@ -71,10 +71,10 @@ def price_checker():
 
 
 def email_sender():
-    gmailaddress = 'xr@gmail.com' #senders email login NOTE: Turn off all bullshit of gmail safety 
-    gmailpassword = 'l' #senders email password
+    gmailaddress = 'nftmailsender@gmail.com' #senders email login NOTE: Turn off all bullshit of gmail safety 
+    gmailpassword = 'NFTlietuva' #senders email password
    
-    mailto = 'x@gmail.com' #write your email
+    mailto = 'iggysservice@gmail.com' #write your email
     msg = 'Pasikeitimas eik checkink savo NFT'
     mailServer = smtplib.SMTP('smtp.gmail.com' , 587)
     mailServer.starttls()
@@ -87,13 +87,13 @@ def email_sender():
 def price_drop():
     print(f" Crash! Dabartinė floor kaina krito žemiau nustatytos {floor} floor ribos: kaina yra {price}")
     email_sender()
-    sleep(60)
+    sleep(300)
 
 
 def price_growth():
     print(f"Kaina auga! NFT floor dabar yra {price}. Tavo nustatyta aukščiausia kainos riba - {roof}")
     email_sender()
-    sleep(60)
+    sleep(300)
 
 def regular_price():
     print(f"Dabartinė floor kaina {price} yra nustatytose ribose: žemiausia galima kaina yra {floor}, didžiausia yra {roof}")
