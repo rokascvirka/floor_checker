@@ -3,36 +3,50 @@ from bs4 import BeautifulSoup as BS
 from time import time, sleep
 import smtplib
 
-#roof = raw_input(float(input('Mažiausia galima kaina?')))
+def highest_floor_price(roof):
+    try:
+        float(roof)
+        return True
+    except ValueError:
+        return False
+    return True
 
-#def clean_roof(roof):
-#    #if roof.isdigit
-#    #roof = roof.replace(",", ".")
-#    while True:
-#        try:
-#            roof = raw_input('Mažiausia galima kaina?')
-#            real_roof = float(roof)
-#            # validity check(s)
-#            if roof < 0: raise ValueError('Skaičius turi būti teigiamas')
-#        except ValueError, e:
-#            print("ValueError: '{}'".format(e))
-#            print("Please try entering it again...")
-#        except KeyboardInterrupt:
-#            sys.exit("\n<terminated by user>")
-#        except:
-#            exc_value = sys.exc_info()[1]
-#            exc_class = exc_value.__class__.__name__
-#            print("{} exception: '{}'".format(exc_class, exc_value))
-#            sys.exit("<fatal error encountered>")
-#        else:
-#            break  # no exceptions occurred, terminate loop
+while True:
+    roof = input('Write the highest floor price: \n')
+    if highest_floor_price(roof):
+        roof = float(roof)
+        if roof >= 0:
+            print(f'The floor is set to: {roof} ')
+            break
+        else:  # Use else
+            print(f"The highest price must be a positive number only. You wrote: '{roof}'. What a noob... Please try again.")
+    else:  # No need to call integer_check(..) again
+        print(f"Sorry, that's not a number. You wrote: '{roof}'. What a double noob you are... Please try again.")
 
-roof = float(0.8)
-floor = float(0.7)
+def lowest_floor_price(floor):
+    try:
+        float(floor)
+        return True
+    except ValueError:
+        return False
+    return True
 
-driver = webdriver.Chrome(executable_path="C:\\Users\\rokas.cvirka\\Downloads\\chromedriver_win32\\chromedriver.exe")
+while True:
+    floor = input('Write the lowest floor price: \n')
+    if lowest_floor_price(floor):
+        floor = float(floor)
+        if floor >= 0:
+            print(f'The floor is set to: {floor} ')
+            break
+        else:  # Use else
+            print(f"The highest price must be a positive number only. You wrote: '{floor}''. What a noob... Please try again.")
+    else:  # No need to call integer_check(..) again
+        print(f"Sorry, that's not a number. You wrote: '{floor}'. What a double noob you are... Please try again.")
 
-driver.get("https://opensea.io/collection/billionaireclubnft")
+
+driver = webdriver.Chrome(executable_path="C:\\Users\\r.c\\Downloads\\chromedriver_win32\\chromedriver.exe") #path to chromedriver.exe. Note that you need to use escape character \ for every - \
+
+driver.get("https://opensea.io/collection/billionaireclubnft") #project link
 
 
 
@@ -45,22 +59,22 @@ def price_checker():
         listas = soup.findAll('div',{"class":"Overflowreact__OverflowContainer-sc-10mm0lu-0 gjwKJf"})
         listas[2].text
 
-        global kaina
-        kaina = float(listas[2].text)
+        global price
+        price = float(listas[2].text)
 
-        if kaina >= roof:
-            kainos_augimas()
-        elif kaina <= floor:
-            kainos_kritimas()
+        if price >= roof:
+            price_growth()
+        elif price <= floor:
+            price_drop()
         else:
-            normali_kaina()
+            regular_price()
 
 
 def email_sender():
-    gmailaddress = 'y@gmail.com'
-    gmailpassword = 'z'
+    gmailaddress = 'xr@gmail.com' #senders email login
+    gmailpassword = 'l' #senders email password
    
-    mailto = 'x@gmail.com'
+    mailto = 'x@gmail.com' #write your email
     msg = 'Pasikeitimas eik checkink savo NFT'
     mailServer = smtplib.SMTP('smtp.gmail.com' , 587)
     mailServer.starttls()
@@ -70,20 +84,19 @@ def email_sender():
     mailServer.quit()
 
 
-def kainos_kritimas():
-    print(f" Crash! Dabartinė floor kaina krito žemiau nustatytos {floor} floor ribos: kaina yra {kaina}")
+def price_drop():
+    print(f" Crash! Dabartinė floor kaina krito žemiau nustatytos {floor} floor ribos: kaina yra {price}")
     email_sender()
-    sleep(60 - time() % 60)
+    sleep(60)
 
 
-def kainos_augimas():
-    print(f"Kaina auga! NFT floor dabar yra {kaina}. Tavo nustatyta aukščiausia kainos riba - {roof}")
+def price_growth():
+    print(f"Kaina auga! NFT floor dabar yra {price}. Tavo nustatyta aukščiausia kainos riba - {roof}")
     email_sender()
-    sleep(60 - time() % 60)
+    sleep(60)
 
-
-def normali_kaina():
-    print(f"Dabartinė floor kaina {kaina} yra nustatytose ribose: žemiausia galima kaina yra {floor}, didžiausia yra {roof}")
-    sleep(60 - time() % 60)
+def regular_price():
+    print(f"Dabartinė floor kaina {price} yra nustatytose ribose: žemiausia galima kaina yra {floor}, didžiausia yra {roof}")
+    sleep(60)
 
 price_checker()
