@@ -71,7 +71,7 @@ def price_checker():
 
 
 def email_sender():
-    gmailaddress = 'xr@gmail.com' #senders email login
+    gmailaddress = 'xr@gmail.com' #senders email login NOTE: Turn off all bullshit of gmail safety 
     gmailpassword = 'l' #senders email password
    
     mailto = 'x@gmail.com' #write your email
