@@ -86,8 +86,8 @@ def price_checker():
 
 
 def price_growth_email_sender():
-    gmailaddress = 'nftmailsender@gmail.com'
-    gmailpassword = 'nftlietuva'
+    gmailaddress = 'xxx@gmail.com'
+    gmailpassword = 'xxx'
    
     mailto = 'iggysservice@gmail.com'
     #msg = print(f'floor kaina pakilo: {price}') + str(kaina)
