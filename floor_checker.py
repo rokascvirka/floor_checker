@@ -3,6 +3,21 @@ from bs4 import BeautifulSoup as BS
 from time import time, sleep
 import smtplib
 
+#import tkinter as tk
+#from tkinter import filedialog, Text
+#import os
+
+#root = tk.Tk()
+
+#canvas = tk.Canvas(root, height=600, width=400, bg="#263d42")
+#canvas.pack()
+
+#frame = tk.Frame(root, bg="#3e646c")
+#frame.place(relwidth=0.8, relheight=0.8, rely=0.1, relx=0.1)
+
+#root.mainloop()
+
+
 def highest_floor_price(roof):
     try:
         float(roof)
@@ -44,9 +59,9 @@ while True:
         print(f"Sorry, that's not a number. You wrote: '{floor}'. What a double noob you are... Please try again.")
 
 
-driver = webdriver.Chrome(executable_path="/Users/Ignas 1/Downloads/chrome driver") #path to chromedriver.exe. Note that you need to use escape character \ for every - \
+driver = webdriver.Chrome(executable_path="C:\\Users\\rokas.cvirka\\Downloads\\chromedriver_win32\\chromedriver.exe")
 
-driver.get("https://opensea.io/collection/billionaireclubnft") #project link
+driver.get("https://opensea.io/collection/cryptozombieznft")
 
 
 
@@ -70,33 +85,53 @@ def price_checker():
             regular_price()
 
 
-def email_sender():
-    gmailaddress = 'y@gmail.com' #senders email login NOTE: Turn off all bullshit of gmail safety 
-    gmailpassword = 'd' #senders email password
+def price_growth_email_sender():
+    gmailaddress = 'nftmailsender@gmail.com'
+    gmailpassword = 'nftlietuva'
    
-    mailto = 'xe@gmail.com' #write your email
-    msg = 'Pasikeitimas eik checkink savo NFT'
-    mailServer = smtplib.SMTP('smtp.gmail.com' , 587)
-    mailServer.starttls()
-    mailServer.login(gmailaddress , gmailpassword)
-    mailServer.sendmail(gmailaddress, mailto , msg)
-    print(" \n Sent!")
-    mailServer.quit()
+    mailto = 'iggysservice@gmail.com'
+    #msg = print(f'floor kaina pakilo: {price}') + str(kaina)
+    msg = 'floor price pakilo iki '  + str(price)
+    mailserver = smtplib.smtp('smtp.gmail.com' , 587)
+    mailserver.starttls()
+    mailserver.login(gmailaddress , gmailpassword)
+    mailserver.sendmail(gmailaddress, mailto , msg)
+    print(" \n sent!")
+    mailserver.quit()
+
+def price_drop_email_sender():
+    gmailaddress = 'nftmailsender@gmail.com'
+    gmailpassword = 'nftlietuva'
+   
+    mailto = 'rokas42@gmail.com'
+    #msg = print(f'dabartinė floor kaina krenta: {price}')
+    msg = 'floor price nukrito iki ' + str(price)
+    mailserver = smtplib.smtp('smtp.gmail.com' , 587)
+    mailserver.starttls()
+    mailserver.login(gmailaddress , gmailpassword)
+    mailserver.sendmail(gmailaddress, mailto , msg)
+    print(" \n sent!")
+    mailserver.quit()
+
 
 
 def price_drop():
-    print(f" Crash! Dabartinė floor kaina krito žemiau nustatytos {floor} floor ribos: kaina yra {price}")
-    email_sender()
+    print(f"crash! dabartinė floor kaina krito žemiau nustatytos {floor} floor ribos: kaina yra {price}")
+    price_drop_email_sender()
     sleep(300)
+    driver.refresh()
 
 
 def price_growth():
-    print(f"Kaina auga! NFT floor dabar yra {price}. Tavo nustatyta aukščiausia kainos riba - {roof}")
-    email_sender()
+    print(f"kaina auga! nft floor dabar yra {price}. tavo nustatyta aukščiausia kainos riba yra {roof}")
+    price_growth_email_sender()
     sleep(300)
+    driver.refresh()
 
 def regular_price():
-    print(f"Dabartinė floor kaina {price} yra nustatytose ribose: žemiausia galima kaina yra {floor}, didžiausia yra {roof}")
+    print(f"dabartinė floor kaina {price} yra nustatytose ribose: žemiausia galima kaina yra {floor}, didžiausia yra {roof}")
     sleep(60)
+    driver.refresh()
 
 price_checker()
+  
